@@ -11,9 +11,10 @@ def index(request):
     return render(request, "index.html", {'myForm' : form, 'request_all' : request_all })
 
 def quest(request):
+    # if request.method == "POST":
     newRec = Clan()
-    newRec.m_fname = 'qqq'
-    newRec.m_lname = 'www'
+    newRec.m_fname = request.POST.get('f_fname')
+    newRec.m_lname = request.POST.get('f_fname')
     newRec.save()
     return HttpResponse('Данные записаны...')
 
