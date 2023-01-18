@@ -8,11 +8,13 @@
 <form method="POST" action="quest/">
     {% csrf_token %}
     {{ myForm }}
-    <input type="submit">
+   <input type="submit">
+<!--     <hr>-->
 </form>
 
 {% for element in request_all %}
-{{ element.m_lname }}
+<hr>
+{{ element.m_lname }} | {{ element.m_fname }} | <a href="edit/{{ element.id }}">правка</a> | <a href="delete/{{ element.id }}">удалить</a>
 <p>
 {% endfor %}
 </body>

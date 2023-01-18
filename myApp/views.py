@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from .forms import FormClan
 from .models import Clan
 
@@ -13,8 +13,22 @@ def index(request):
 def quest(request):
     # if request.method == "POST":
     newRec = Clan()
+    newRec.m_lname = request.POST.get('f_lname')
     newRec.m_fname = request.POST.get('f_fname')
-    newRec.m_lname = request.POST.get('f_fname')
     newRec.save()
-    return HttpResponse('Данные записаны...')
+    return HttpResponseRedirect("/")
+    # return HttpResponse('Данные записаны...')
+
+def delete(request, id):
+    try:
+        person = Clan.objects.get(id=id)
+        person.delete()
+        return HttpResponseRedirect("/")
+    except Clan.DoesNotExist:
+        return HttpResponseNotFound("<h2>Нет такого клиента</h2>")
+
+def edit(request, id):
+    person = Clan.objects.get(id=id)
+    return HttpResponse('edit')
+
 
