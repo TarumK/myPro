@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="POST" action="quest/">
+    {% csrf_token %}
+    {{ myForm }}
+    <input type="submit">
+</form>
+
+{% for element in request_all %}
+{{ element.m_lname }}
+<p>
+{% endfor %}
+</body>
+</html>
