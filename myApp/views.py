@@ -29,6 +29,13 @@ def delete(request, id):
 
 def edit(request, id):
     person = Clan.objects.get(id=id)
-    return HttpResponse('edit')
+    if request.method == "POST":
+        person.m_lname = request.POST.get("f_name")
+        person.m_fname = request.POST.get("l_name")
+        person.save()
+        return HttpResponseRedirect('/')
+    else:
+        # person = Clan.objects.get(id=id)
+        return render(request, "edit.html", {"person": person})
 
 
